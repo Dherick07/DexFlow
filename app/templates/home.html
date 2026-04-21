@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}DexFlow — Automations{% endblock %}
+
+{% block content %}
+<h1 class="text-3xl font-semibold mb-2">Automations</h1>
+<p class="text-slate-600 mb-8">Select an automation to run. Upload the required file(s); download the processed output.</p>
+
+<section class="space-y-8">
+
+    <div>
+        <h2 class="text-xl font-semibold text-slate-800 mb-3">Chemika</h2>
+        <ul class="space-y-2">
+            <li>
+                <a href="/chemika/invoice-txt" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
+                    <div class="font-medium">Invoice TXT Formatter</div>
+                    <div class="text-sm text-slate-500">Convert invoice spreadsheet into tab-delimited .txt for accounting import.</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+</section>
+{% endblock %}
