@@ -1,0 +1,8 @@
+:80 {
+    reverse_proxy app:8000
+
+    # Generous timeouts for long-running Excel processing
+    request_body {
+        max_size 50MB
+    }
+}
