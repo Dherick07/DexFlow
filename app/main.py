@@ -5,12 +5,16 @@ from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from app.routers import chemika as chemika_router
+
 BASE_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(title="DexFlow", description="Dexterous Group automation hub")
 
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
+
+app.include_router(chemika_router.router, prefix="/chemika", tags=["chemika"])
 
 
 @app.get("/", response_class=HTMLResponse)
