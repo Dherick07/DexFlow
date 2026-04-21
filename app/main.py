@@ -5,6 +5,7 @@ from fastapi.responses import HTMLResponse, PlainTextResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from app.routers import capspace as capspace_router
 from app.routers import chemika as chemika_router
 from app.routers import primebuild as primebuild_router
 
@@ -15,6 +16,7 @@ app = FastAPI(title="DexFlow", description="Dexterous Group automation hub")
 app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
+app.include_router(capspace_router.router, prefix="/capspace", tags=["capspace"])
 app.include_router(chemika_router.router, prefix="/chemika", tags=["chemika"])
 app.include_router(primebuild_router.router, prefix="/primebuild", tags=["primebuild"])
 
