@@ -10,10 +10,12 @@ from fastapi import APIRouter, File, Form, HTTPException, Request, UploadFile
 from fastapi.responses import HTMLResponse, StreamingResponse
 from fastapi.templating import Jinja2Templates
 
+from app.automations_registry import grouped_by_client
 from app.services import primebuild as primebuild_service
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
+templates.env.globals["sidebar_groups"] = grouped_by_client()
 
 router = APIRouter()
 

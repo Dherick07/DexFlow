@@ -89,6 +89,9 @@ Actual outputs are saved to `tests/actual/` on each run for manual inspection.
 ## Current Status
 
 > **Last updated:** 2026-04-23
-> **Status:** Capspace (3 endpoints) and Chemika Invoice TXT smoke-tested against real data — all passing. Two bugs fixed in Chemika Invoice TXT during testing (date format was D/M/YYYY zero-padded; sort was case-sensitive). Chemika Payroll Extractor not yet smoke-tested. Sales Invoicing Part 1 and Primebuild (3 endpoints) not yet ported. UI refinement (Phase 1c) queued after all automations are ported.
+> **Ported (8/9 endpoints):** Capspace ×3, Chemika ×2, Primebuild ×3. Sales Invoicing Part 1 remains outstanding.
+> **Smoke-tested against Bien's reference data:** Capspace ×3 + Chemika Invoice TXT (all passing). Chemika Payroll Extractor and Primebuild ×3 still need HTTP smoke tests against reference outputs.
+> **Phase 1c UI restyle:** Complete for all 8 ported endpoints via [PR #6](https://github.com/Dherick07/DexFlow/pull/6) — LearnHub-dialect claymorphism, registry-driven sidebar, public landing + featured-4 home + all-8 automations catalog. Template/CSS only — no automation logic touched. 12/12 pytest tests passing (registry + route smoke tests). Browser-level visual QA pending.
+> **Next up:** Merge PR #6 → port Sales Invoicing Part 1 → smoke-test remaining 4 endpoints → Bien walkthrough (~week of 2026-04-27).
 
 <!-- TODO: Update this as the project progresses -->
