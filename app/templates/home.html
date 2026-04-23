@@ -1,78 +1,39 @@
-{% extends "base.html" %}
+{% extends "_base_auth.html" %}
+{% import "_icons.html" as icons %}
 
-{% block title %}DexFlow — Automations{% endblock %}
+{% block title %}DexFlow — Home{% endblock %}
 
 {% block content %}
-<h1 class="text-3xl font-semibold mb-2">Automations</h1>
-<p class="text-slate-600 mb-8">Select an automation to run. Upload the required file(s); download the processed output.</p>
+<div class="container-1080">
+  <div class="text-center mb-10 sm:mb-12">
+    <span class="clay-chip clay-chip--brand" style="box-shadow: 2px 2px 0 #0f172a;">Automations</span>
+    <h1 class="clay-display text-[32px] sm:text-[36px] mt-4">Built in-house,<br>tuned for the team.</h1>
+    <p class="mt-4 max-w-[520px] mx-auto text-[15px] text-slate-500 leading-relaxed">
+      Pick an automation, upload the required files, and download clean output.
+      A few of the workflows the Dexterous team runs every month.
+    </p>
+  </div>
 
-<section class="space-y-8">
+  <div class="grid sm:grid-cols-2 gap-5 sm:gap-6 mb-10">
+    {% for a in featured_automations %}
+      <a href="{{ a.href }}" class="clay-card clay-card-link">
+        <span class="clay-chip clay-chip--{{ a.client_hue }} clay-chip--on-card">{{ a.client_label }}</span>
+        <div class="flex items-start gap-4 pr-20">
+          <span class="clay-tile clay-tile--{{ a.client_hue }}">{{ icons.render(a.icon, class_="w-6 h-6") }}</span>
+          <div class="min-w-0">
+            <h3 class="text-[17px] sm:text-[18px] mt-0.5 mb-1">{{ a.name }}</h3>
+            <p class="text-[14px] text-slate-500 leading-relaxed font-normal">{{ a.description }}</p>
+          </div>
+        </div>
+      </a>
+    {% endfor %}
+  </div>
 
-    <div>
-        <h2 class="text-xl font-semibold text-slate-800 mb-3">Capspace</h2>
-        <ul class="space-y-2">
-            <li>
-                <a href="/capspace/unit-register" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Unit Register</div>
-                    <div class="text-sm text-slate-500">Combine CPDF / DLOT / CDLOT2 investor statements into a single Client Statement workbook.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/capspace/loan-register" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Loan Register</div>
-                    <div class="text-sm text-slate-500">Extract Entity, Borrower, Balance, Interest, Reserve from the monthly Capspace Loans statement.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/capspace/interest-payments" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Interest Payments</div>
-                    <div class="text-sm text-slate-500">Consolidate Mortgage Pool Distribution Audit Reports into per-entity sheets with Payee flags.</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div>
-        <h2 class="text-xl font-semibold text-slate-800 mb-3">Chemika</h2>
-        <ul class="space-y-2">
-            <li>
-                <a href="/chemika/payroll-extractor" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Payroll Timesheet Extractor</div>
-                    <div class="text-sm text-slate-500">Consolidate employee timesheet .xlsx files into a single monthly payroll summary.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/chemika/invoice-txt" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Invoice TXT Formatter</div>
-                    <div class="text-sm text-slate-500">Convert invoice spreadsheet into tab-delimited .txt for accounting import.</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-    <div>
-        <h2 class="text-xl font-semibold text-slate-800 mb-3">Primebuild</h2>
-        <ul class="space-y-2">
-            <li>
-                <a href="/primebuild/journals" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Payroll Journals</div>
-                    <div class="text-sm text-slate-500">Convert raw JNL exports into formatted General Ledger Journal Download files, bundled as a ZIP.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/primebuild/hours-worked" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Hours Worked — Compliance</div>
-                    <div class="text-sm text-slate-500">Flag long shifts, short breaks, fatigue risk, and &gt;60h/week from timesheet exports.</div>
-                </a>
-            </li>
-            <li>
-                <a href="/primebuild/keypay-location" class="block bg-white border border-slate-200 rounded-lg px-4 py-3 hover:border-blue-400 hover:shadow-sm transition">
-                    <div class="font-medium">Keypay Location</div>
-                    <div class="text-sm text-slate-500">Classify Keypay timesheets into approved / unapproved &times; allocated / unallocated categories.</div>
-                </a>
-            </li>
-        </ul>
-    </div>
-
-</section>
+  <div class="text-center">
+    <a href="/automations" class="clay-btn-pill-ghost">
+      View all automations
+      {{ icons.render("arrow-right", class_="w-4 h-4") }}
+    </a>
+  </div>
+</div>
 {% endblock %}
