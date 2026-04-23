@@ -1,0 +1,27 @@
+{% extends "_base_auth.html" %}
+{% import "_icons.html" as icons %}
+
+{% block title %}DexFlow — All automations{% endblock %}
+
+{% block content %}
+<div class="container-1080">
+  <div class="text-center mb-10 sm:mb-12">
+    <span class="clay-chip clay-chip--brand" style="box-shadow: 2px 2px 0 #0f172a;">All automations</span>
+    <h1 class="clay-display text-[32px] sm:text-[36px] mt-4">Every workflow.<br>One place.</h1>
+    <p class="mt-4 max-w-[520px] mx-auto text-[15px] text-slate-500 leading-relaxed">
+      All 8 automations the team runs across Capspace, Chemika, and Primebuild.
+    </p>
+  </div>
+
+  <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+    {% for a in automations %}
+      <a href="{{ a.href }}" class="clay-card clay-card-link">
+        <span class="clay-chip clay-chip--{{ a.client_hue }} clay-chip--on-card">{{ a.client_label }}</span>
+        <span class="clay-tile clay-tile--{{ a.client_hue }} mb-4">{{ icons.render(a.icon, class_="w-6 h-6") }}</span>
+        <h3 class="text-[17px] mb-1">{{ a.name }}</h3>
+        <p class="text-[14px] text-slate-500 leading-relaxed font-normal">{{ a.description }}</p>
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
