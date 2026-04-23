@@ -1,0 +1,148 @@
+{% extends "base.html" %}
+{% import "_icons.html" as icons %}
+
+{% block title %}DexFlow — Dexterous Group automation hub{% endblock %}
+
+{% block head_extra %}
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+{% endblock %}
+
+{% block body %}
+<main>
+  {# Pill nav #}
+  <div class="container-820 py-6">
+    <nav class="flex items-center gap-5 bg-white border-[2.5px] border-slate-900 rounded-full px-4 py-2.5"
+         style="box-shadow: 4px 4px 0 #0f172a;">
+      <a href="/" class="flex items-center gap-2.5">
+        <span class="w-8 h-8 border-2 border-slate-900 rounded-lg flex items-center justify-center font-extrabold text-[12px]"
+              style="background: var(--brand-accent-bg); color: var(--brand-primary); font-family: 'Poppins', sans-serif;">DG</span>
+        <span class="font-bold text-[15px] tracking-tight" style="font-family: 'Poppins', sans-serif;">DexFlow</span>
+      </a>
+      <div class="ml-auto flex items-center gap-5 text-[13px] text-slate-600 font-semibold">
+        <a href="/home" class="hover:text-slate-900">Automations</a>
+      </div>
+      <a href="/home" class="flex items-center gap-1.5 px-3.5 py-1.5 border-2 border-slate-900 rounded-full text-white text-[12px] font-bold"
+         style="background: var(--brand-primary); box-shadow: 3px 3px 0 #0f172a; font-family: 'Poppins', sans-serif;">
+        {{ icons.render("microsoft", class_="w-3 h-3") }}
+        Sign in
+      </a>
+    </nav>
+  </div>
+
+  {# Hero #}
+  <section class="container-1080 py-10 sm:py-16">
+    <div class="grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-14 items-center">
+      <div>
+        <span class="clay-eyebrow mb-4">Dexterous Group · v1</span>
+        <h1 class="clay-display text-[40px] sm:text-[52px] mt-4">
+          Your accounting<br>automations,<br>
+          <span class="text-brand-accent">all in one place.</span>
+        </h1>
+        <p class="mt-5 text-[15px] text-slate-600 leading-relaxed max-w-[460px]">
+          DexFlow is Dexterous Group's internal automation hub — upload your files,
+          run the workflow, and download clean outputs. Built in-house, self-hosted,
+          tuned for how the team actually works.
+        </p>
+        <div class="mt-6 flex flex-wrap items-center gap-3">
+          <a href="/home" class="clay-btn-pill">
+            {{ icons.render("microsoft", class_="w-3.5 h-3.5") }}
+            Sign in with Microsoft →
+          </a>
+          <a href="/home" class="clay-btn-pill-ghost">Explore automations</a>
+        </div>
+      </div>
+
+      <div class="relative max-w-[400px] ml-auto">
+        <div class="bg-white border-[2.5px] border-slate-900 rounded-[20px] p-5" style="box-shadow: 6px 6px 0 #0f172a;">
+          <div class="flex items-center gap-3 mb-4">
+            <span class="w-11 h-11 border-2 border-slate-900 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style="background: var(--brand-accent-bg); color: var(--brand-primary);">
+              {{ icons.render("table-cells", class_="w-5 h-5") }}
+            </span>
+            <div class="min-w-0">
+              <div class="font-bold text-[14px]" style="font-family: 'Poppins', sans-serif;">Monthly Reconciliation</div>
+              <div class="text-[11px] text-slate-500">Dexterous Group · 12 files processed</div>
+            </div>
+          </div>
+          <div class="flex justify-between text-[11px] font-semibold text-slate-500 mb-1.5">
+            <span>Processing</span>
+            <span class="font-bold" style="color: var(--brand-primary); font-family: 'Poppins', sans-serif;">72%</span>
+          </div>
+          <div class="h-2.5 border-2 border-slate-900 rounded-full overflow-hidden mb-3.5"
+               style="background: var(--brand-primary-soft);">
+            <div class="h-full" style="background: var(--brand-primary); width: 72%;"></div>
+          </div>
+          <div class="text-center border-2 border-slate-900 rounded-xl py-2 text-white text-[12px] font-bold"
+               style="background: var(--brand-primary); box-shadow: 3px 3px 0 #0f172a; font-family: 'Poppins', sans-serif;">
+            Download processed output
+          </div>
+        </div>
+
+        {# Floating deco #}
+        <span class="hidden sm:flex absolute -top-6 -right-6 w-14 h-14 border-[2.5px] border-slate-900 rounded-2xl items-center justify-center"
+              style="background: var(--clay-peach); color: var(--clay-peach-fg); box-shadow: 3px 3px 0 #0f172a;">
+          {{ icons.render("check-circle", class_="w-6 h-6") }}
+        </span>
+        <span class="hidden sm:flex absolute -bottom-4 -left-4 w-12 h-12 border-[2.5px] border-slate-900 rounded-full items-center justify-center"
+              style="background: var(--clay-butter); color: var(--clay-butter-fg); box-shadow: 3px 3px 0 #0f172a;">
+          {{ icons.render("sparkles", class_="w-5 h-5") }}
+        </span>
+        <span class="hidden sm:flex absolute top-1/2 -right-6 w-10 h-10 border-[2.5px] border-slate-900 rounded-xl items-center justify-center"
+              style="background: var(--clay-lavender); color: var(--clay-lavender-fg); transform: rotate(8deg); box-shadow: 3px 3px 0 #0f172a;">
+          {{ icons.render("table-cells", class_="w-5 h-5") }}
+        </span>
+      </div>
+    </div>
+  </section>
+
+  {# Trust section — 3 cards #}
+  <section class="container-1080 py-10 sm:py-14">
+    <div class="text-center mb-10">
+      <h2 class="clay-display text-[28px] sm:text-[32px]">Made for the Dexterous team</h2>
+      <p class="mt-2 text-[15px] text-slate-500 max-w-xl mx-auto">
+        Designed around real monthly workflows, not a generic SaaS dashboard.
+      </p>
+    </div>
+    <div class="grid sm:grid-cols-3 gap-5">
+      <div class="clay-card">
+        <span class="clay-tile clay-tile--peach mb-4">{{ icons.render("shield-check", class_="w-6 h-6") }}</span>
+        <h3 class="text-[17px] mb-1.5">For accountants</h3>
+        <p class="text-[14px] text-slate-500 leading-relaxed font-normal">Run the same monthly workflows without wrestling with Excel macros or Streamlit setup.</p>
+      </div>
+      <div class="clay-card">
+        <span class="clay-tile clay-tile--mint mb-4">{{ icons.render("check-circle", class_="w-6 h-6") }}</span>
+        <h3 class="text-[17px] mb-1.5">Self-hosted</h3>
+        <p class="text-[14px] text-slate-500 leading-relaxed font-normal">Runs on Dexterous infrastructure. No third-party data paths, no external logins you don't own.</p>
+      </div>
+      <div class="clay-card">
+        <span class="clay-tile clay-tile--butter mb-4">{{ icons.render("sparkles", class_="w-6 h-6") }}</span>
+        <h3 class="text-[17px] mb-1.5">Built in-house</h3>
+        <p class="text-[14px] text-slate-500 leading-relaxed font-normal">Designed around how the Dexterous team actually works — new automations added in days.</p>
+      </div>
+    </div>
+  </section>
+
+  {# Final CTA #}
+  <section class="container-1080 py-10 sm:py-14">
+    <div class="clay-card text-center py-10 sm:py-14">
+      <h2 class="clay-display text-[28px] sm:text-[32px]">Ready to get started?</h2>
+      <p class="mt-3 text-[14px] text-slate-500 max-w-md mx-auto">
+        Sign in with your Dexterous Microsoft account to run your first automation.
+      </p>
+      <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+        <a href="/home" class="clay-btn-pill">
+          {{ icons.render("microsoft", class_="w-3.5 h-3.5") }}
+          Sign in with Microsoft →
+        </a>
+        <a href="/home" class="clay-btn-pill-ghost">Explore automations</a>
+      </div>
+    </div>
+  </section>
+
+  <footer class="border-t-2 border-slate-200 mt-6">
+    <div class="container-1080 py-5 text-center text-[11px] font-semibold uppercase tracking-wider text-slate-400">
+      DexFlow · Dexterous Group © 2026
+    </div>
+  </footer>
+</main>
+{% endblock %}
