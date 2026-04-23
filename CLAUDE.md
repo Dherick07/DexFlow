@@ -66,9 +66,29 @@ See [[00 Wiki/Patterns/Self-Hosted-Automation-Hub]] for the full pattern.
 - **`(C)` prefix** — Files created by Claude are prefixed with `(C)` so they're clearly AI-generated.
 - **Editing rule** — Before editing any file without the `(C)` prefix, ask for permission first.
 
+## Testing
+
+A smoke test runner lives at `tests/run_tests.py`. It sends real HTTP requests to the running app and compares outputs against Bien's expected files in `tests/`.
+
+**Run it:**
+```bash
+pip install requests   # one-time
+uvicorn app.main:app --reload
+python tests/run_tests.py
+```
+
+| Test | File | Status |
+|---|---|---|
+| Chemika Invoice TXT | `tests/Chemika/Invoice_TXT_Formatter/` | Pass |
+| Capspace Unit Register | `tests/Capspace/Unit Register/` | Pass |
+| Capspace Loan Register | `tests/Capspace/Loans Register/` | Pass |
+| Capspace Interest Payments | `tests/Capspace/Interest Payments/` | Pass |
+
+Actual outputs are saved to `tests/actual/` on each run for manual inspection.
+
 ## Current Status
 
-> **Last updated:** 2026-04-21
-> **Status:** Scaffold + Chemika Invoice TXT live locally (Docker). 8 automations remaining. Waiting on Bien's sample Chemika input file for smoke test. UI refinement (Phase 1c) queued after automations are ported.
+> **Last updated:** 2026-04-23
+> **Status:** Capspace (3 endpoints) and Chemika Invoice TXT smoke-tested against real data — all passing. Two bugs fixed in Chemika Invoice TXT during testing (date format was D/M/YYYY zero-padded; sort was case-sensitive). Chemika Payroll Extractor not yet smoke-tested. Sales Invoicing Part 1 and Primebuild (3 endpoints) not yet ported. UI refinement (Phase 1c) queued after all automations are ported.
 
 <!-- TODO: Update this as the project progresses -->

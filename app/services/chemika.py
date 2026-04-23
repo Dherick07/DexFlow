@@ -393,10 +393,13 @@ def build_payroll_output(results, month_label) -> bytes:
 def txt_format_date(val) -> str:
     if val is None or (isinstance(val, float) and pd.isna(val)):
         return ""
+    if isinstance(val, str):
+        return val.strip()
     if isinstance(val, pd.Timestamp):
-        return val.strftime("%d/%m/%Y")
+        return f"{val.month}/{val.day}/{val.year}"
     try:
-        return pd.to_datetime(val).strftime("%d/%m/%Y")
+        dt = pd.to_datetime(val)
+        return f"{dt.month}/{dt.day}/{dt.year}"
     except Exception:
         return str(val)
 
@@ -426,7 +429,7 @@ def build_txt(
         df["Other"] = ""
     df = df.sort_values(
         by=["Company Name", "Invoice Number"],
-        key=lambda col: col.astype(str) if col.name == "Company Name"
+        key=lambda col: col.str.lower() if col.name == "Company Name"
                         else pd.to_numeric(col, errors="coerce").fillna(0),
     )
     header = TAB.join([
