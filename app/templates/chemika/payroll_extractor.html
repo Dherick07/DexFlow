@@ -60,6 +60,9 @@
       <input type="file" name="files" accept=".xlsx" multiple required @change="fileCount = $event.target.files.length" class="sr-only">
       <div class="text-[12px] mt-2 text-slate-600" x-show="fileCount > 0" x-cloak><span x-text="fileCount"></span> file(s) selected</div>
     </label>
+    <label class="block text-[13px] font-semibold mb-2" style="font-family: 'Poppins', sans-serif;">Month label (for report header &amp; filename)</label>
+    <input type="text" name="month_label" value="{{ default_month }}" required
+           class="block w-full mb-4 text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
     <button type="submit" :disabled="submitting" class="clay-btn">
       <span x-show="!submitting">Extract & Download →</span>
       <span x-show="submitting" x-cloak>Processing…</span>

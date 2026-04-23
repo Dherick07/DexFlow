@@ -60,6 +60,29 @@
       <input type="file" name="file" accept=".xlsx,.xls" required @change="fileName = $event.target.files[0]?.name || ''" class="sr-only">
       <div class="text-[12px] mt-2 text-slate-600" x-show="fileName" x-cloak x-text="fileName"></div>
     </label>
+    <div class="mb-3 text-[11px] font-bold uppercase tracking-wider text-slate-500" style="font-family: 'Poppins', sans-serif;">Invoice options</div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+      <div>
+        <label class="block text-[12px] font-semibold mb-1" style="font-family: 'Poppins', sans-serif;">Memo</label>
+        <input type="text" name="memo" value="" class="block w-full text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
+      </div>
+      <div>
+        <label class="block text-[12px] font-semibold mb-1" style="font-family: 'Poppins', sans-serif;">Account code</label>
+        <input type="text" name="account" value="" class="block w-full text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
+      </div>
+      <div>
+        <label class="block text-[12px] font-semibold mb-1" style="font-family: 'Poppins', sans-serif;">Due Date (days)</label>
+        <input type="number" name="due_date" value="0" min="0" class="block w-full text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
+      </div>
+      <div>
+        <label class="block text-[12px] font-semibold mb-1" style="font-family: 'Poppins', sans-serif;">Due Days</label>
+        <input type="number" name="due_days" value="0" min="0" class="block w-full text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
+      </div>
+      <div class="sm:col-span-2">
+        <label class="block text-[12px] font-semibold mb-1" style="font-family: 'Poppins', sans-serif;">Tax Code</label>
+        <input type="text" name="tax_code" value="" class="block w-full text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
+      </div>
+    </div>
     <button type="submit" :disabled="submitting" class="clay-btn">
       <span x-show="!submitting">Convert & Download →</span>
       <span x-show="submitting" x-cloak>Processing…</span>
