@@ -1,54 +1,72 @@
-{% extends "base.html" %}
+{% extends "_base_auth.html" %}
+{% import "_icons.html" as icons %}
 
 {% block title %}Primebuild — Payroll Journals{% endblock %}
 
 {% block content %}
-<nav class="text-sm text-slate-500 mb-4">
-    <a href="/" class="hover:text-blue-600">Home</a>
-    <span class="mx-1">/</span>
-    <span>Primebuild</span>
-    <span class="mx-1">/</span>
-    <span class="text-slate-700">Payroll Journals</span>
-</nav>
+<div class="container-780">
+  <span class="clay-chip clay-chip--lavender" style="box-shadow: 2px 2px 0 #0f172a;">Primebuild</span>
+  <h1 class="clay-display text-[28px] sm:text-[32px] mt-3 mb-2">Payroll Journals</h1>
+  <p class="text-[15px] text-slate-600 leading-relaxed max-w-[640px]">
+    Upload one or more raw JNL exports. Converts each into a General Ledger Journal Download file per entity, bundled into a single ZIP ready for upload to the GL system. ROL routing rules applied per entity.
+  </p>
 
-<h1 class="text-2xl font-semibold mb-2">Payroll Journals</h1>
-<p class="text-slate-600 mb-6">
-    Upload one or more raw journal export files (.xlsx). Filename convention:
-    <code class="bg-slate-100 px-1 rounded">STATE_FREQ_YYYYMMDD_JNL_Raw.xlsx</code>
-    (e.g. <code class="bg-slate-100 px-1 rounded">NSW_WK_20260421_JNL_Raw.xlsx</code>).
-    Output: a ZIP containing one formatted General Ledger Journal Download per input file.
-</p>
+  {% if error %}<div class="clay-error mt-6"><strong>Error:</strong> {{ error }}</div>{% endif %}
 
-{% if error %}
-<div class="bg-red-50 border border-red-200 text-red-800 rounded-lg px-4 py-3 mb-6">
-    <strong>Error:</strong> {{ error }}
-</div>
-{% endif %}
+  <div class="mt-8 mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-500" style="font-family: 'Poppins', sans-serif;">
+    <span class="w-6 h-0.5 bg-slate-900 rounded-full"></span>How it works
+  </div>
 
-<form method="POST" enctype="multipart/form-data" class="bg-white border border-slate-200 rounded-lg p-6 space-y-5"
-      x-data="{ submitting: false, fileCount: 0 }" @submit="submitting = true">
-
-    <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Raw journal files (.xlsx)</label>
-        <input type="file" name="files" accept=".xlsx" multiple required
-               @change="fileCount = $event.target.files.length"
-               class="block w-full text-sm border border-slate-300 rounded-md file:bg-slate-100 file:border-0 file:px-4 file:py-2 file:mr-4 file:text-sm file:font-medium">
-        <p class="text-xs text-slate-500 mt-1" x-show="fileCount > 0" x-cloak>
-            <span x-text="fileCount"></span> file(s) selected
-        </p>
+  <div class="clay-card">
+    <div class="grid grid-cols-1 sm:grid-cols-[1fr_auto_1fr_auto_1fr] gap-3 sm:gap-2 items-start text-center">
+      <div>
+        <span class="clay-tile clay-tile--peach mb-2.5">{{ icons.render("arrow-up-tray", class_="w-6 h-6") }}</span>
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-900 mb-1.5" style="font-family: 'Poppins', sans-serif;">Inputs</div>
+        <div class="text-[13px] text-slate-600 leading-relaxed">
+          One or more raw JNL exports + payment date.
+          <div class="mt-2 flex flex-wrap gap-1 justify-center"><span class="clay-code">.xlsx</span></div>
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center text-slate-400 text-2xl font-extrabold pt-6">&rarr;</div>
+      <div>
+        <span class="clay-tile mb-2.5" style="background: var(--clay-mint); color: var(--clay-mint-fg);">{{ icons.render("cog-6-tooth", class_="w-6 h-6") }}</span>
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-900 mb-1.5" style="font-family: 'Poppins', sans-serif;">Process</div>
+        <div class="text-[13px] text-slate-600 leading-relaxed">
+          Applies ROL routing rules, splits rows per entity, formats each into a GL Journal Download file, bundles into a ZIP.
+        </div>
+      </div>
+      <div class="hidden sm:flex items-center text-slate-400 text-2xl font-extrabold pt-6">&rarr;</div>
+      <div>
+        <span class="clay-tile clay-tile--mint mb-2.5">{{ icons.render("arrow-down-tray", class_="w-6 h-6") }}</span>
+        <div class="text-[11px] font-bold uppercase tracking-wider text-slate-900 mb-1.5" style="font-family: 'Poppins', sans-serif;">Output</div>
+        <div class="text-[13px] text-slate-600 leading-relaxed">
+          A ZIP with one GL Journal Download per entity.
+          <div class="mt-2 flex flex-wrap gap-1 justify-center"><span class="clay-code">Payroll_Journals.zip</span></div>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div>
-        <label class="block text-sm font-medium text-slate-700 mb-1">Payment date</label>
-        <input type="date" name="payment_date" required
-               class="block w-full text-sm border border-slate-300 rounded-md px-3 py-2">
-    </div>
+  <div class="mt-8 mb-3 flex items-center gap-2 text-[11px] font-bold uppercase tracking-wider text-slate-500" style="font-family: 'Poppins', sans-serif;">
+    <span class="w-6 h-0.5 bg-slate-900 rounded-full"></span>Run it
+  </div>
 
-    <button type="submit"
-            :disabled="submitting"
-            class="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed">
-        <span x-show="!submitting">Generate &amp; Download Journals (.zip)</span>
-        <span x-show="submitting" x-cloak>Processing…</span>
+  <form method="POST" enctype="multipart/form-data" class="clay-card"
+        x-data="{ submitting: false, fileCount: 0 }" @submit="submitting = true">
+    <label class="block text-[13px] font-semibold mb-2" style="font-family: 'Poppins', sans-serif;">Raw JNL exports (.xlsx)</label>
+    <label class="clay-dropzone mb-4 block cursor-pointer">
+      <div class="font-bold" style="color: var(--brand-primary);">Drop files here or click to browse</div>
+      <div class="text-[12px] text-slate-400 mt-1">Multiple files supported</div>
+      <input type="file" name="files" accept=".xlsx" multiple required @change="fileCount = $event.target.files.length" class="sr-only">
+      <div class="text-[12px] mt-2 text-slate-600" x-show="fileCount > 0" x-cloak><span x-text="fileCount"></span> file(s) selected</div>
+    </label>
+    <label class="block text-[13px] font-semibold mb-2" style="font-family: 'Poppins', sans-serif;">Payment date</label>
+    <input type="date" name="payment_date" required
+           class="block w-full mb-4 text-[14px] border-2 border-slate-900 rounded-lg px-3 py-2 bg-white">
+    <button type="submit" :disabled="submitting" class="clay-btn">
+      <span x-show="!submitting">Convert & Download ZIP &rarr;</span>
+      <span x-show="submitting" x-cloak>Processing&hellip;</span>
     </button>
-</form>
+  </form>
+</div>
 {% endblock %}
